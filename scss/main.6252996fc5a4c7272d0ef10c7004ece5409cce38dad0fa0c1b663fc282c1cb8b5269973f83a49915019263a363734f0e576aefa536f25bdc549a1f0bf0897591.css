@@ -1,0 +1,4263 @@
+@charset "UTF-8";
+/*!------------------------------------------------------------------
+[MAIN STYLESHEET]
+
+Surcharge projet de themes/educenter-hugo/assets/scss/main.scss.
+
+Le thème est un sous-module git : on ne peut pas y toucher. Or son main.scss
+importe `typography` (surchargé par le projet) AVANT `buttons`, `common` et les
+quatre feuilles `templates/*` du thème. À spécificité égale, le thème gagnait
+donc systématiquement sur nos surcharges — c'est ce qui neutralisait déjà
+`.copyright p { color: rgba(255,255,255,.85) }` dans _typography.scss.
+
+Ce fichier reprend la liste d'imports du thème à l'identique et ajoute
+`_a11y.scss` EN DERNIER, pour que les correctifs RGAA gagnent la cascade.
+-------------------------------------------------------------------*/
+/*  typography — charte École nationale des chartes – PSL
+    Titres : CartaNova (locale) / fallback serif
+    Paragraphes : Noto Sans
+*/
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap");
+@font-face {
+  font-family: 'CartaNova';
+  src: local("CartaNova"), local("CartaNova-Regular");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap; }
+
+@font-face {
+  font-family: 'CartaNova';
+  src: local("CartaNova Italic"), local("CartaNova-Italic");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap; }
+
+body {
+  line-height: 1.5;
+  font-family: "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+  color: #333333; }
+
+p, .paragraph {
+  font-weight: 400;
+  color: #333333;
+  font-size: 16px;
+  line-height: 1.7;
+  font-family: "Noto Sans", "Helvetica Neue", Arial, sans-serif; }
+
+h1, h2, h3, h4, h5, h6 {
+  color: #bc052d;
+  font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  font-weight: 600;
+  line-height: 1.2; }
+
+h1, .h1 {
+  font-size: 56px; }
+  @media (max-width: 575px) {
+    h1, .h1 {
+      font-size: 40px; } }
+h2, .h2 {
+  font-size: 38px; }
+  @media (max-width: 575px) {
+    h2, .h2 {
+      font-size: 28px; } }
+h3, .h3 {
+  font-size: 26px; }
+  @media (max-width: 575px) {
+    h3, .h3 {
+      font-size: 22px; } }
+h4, .h4 {
+  font-size: 22px; }
+  @media (max-width: 575px) {
+    h4, .h4 {
+      font-size: 18px; } }
+h5, .h5 {
+  font-size: 18px; }
+  @media (max-width: 575px) {
+    h5, .h5 {
+      font-size: 16px; } }
+h6, .h6 {
+  font-size: 16px; }
+  @media (max-width: 575px) {
+    h6, .h6 {
+      font-size: 14px; } }
+a {
+  color: #bc052d; }
+  a:hover, a:focus {
+    color: #00445e;
+    text-decoration: none; }
+
+@media (max-width: 991px) {
+  .navbar-brand {
+    margin-left: 0; } }
+
+.navbar-brand img {
+  height: 60px !important;
+  width: auto !important;
+  max-width: none !important;
+  max-height: 60px;
+  object-fit: contain; }
+
+.navbar-nav .nav-item .nav-link {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap; }
+
+.navbar-expand-lg .navbar-nav .nav-link {
+  padding-top: 30px;
+  padding-bottom: 30px; }
+
+@media (min-width: 992px) {
+  .navbar-nav {
+    box-shadow: 100vw 0 0 0 #bc052d; } }
+
+/* ───────────────────────────────────────────────────────────────
+   FOOTER — couleur ENC bleu paon, hauteur réduite, texte blanc
+   ─────────────────────────────────────────────────────────────── */
+.bg-footer {
+  background-color: #00445e !important; }
+
+.footer {
+  padding-top: 60px !important;
+  padding-bottom: 40px !important;
+  color: #fff; }
+  .footer p, .footer li, .footer address {
+    color: #fff; }
+  .footer a {
+    color: rgba(255, 255, 255, 0.85); }
+    .footer a:hover {
+      color: #fff;
+      text-decoration: underline; }
+  .footer h4 {
+    color: #fff !important; }
+
+.copyright p,
+.copyright {
+  color: rgba(255, 255, 255, 0.85); }
+
+.hero-section.overlay::before,
+.page-title-section.overlay::before,
+.overlay::before {
+  background: #00445e !important;
+  opacity: 0.8 !important; }
+
+.team-section .card-img-top {
+  height: 240px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center top; }
+
+.hero-section,
+.page-title-section {
+  position: relative !important;
+  overflow: hidden;
+  isolation: isolate; }
+  .hero-section .hero-bg-img,
+  .page-title-section .hero-bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0; }
+  .hero-section.overlay::before,
+  .page-title-section.overlay::before {
+    z-index: 1; }
+
+/* ───────────────────────────────────────────────────────────────
+   PAGE MASTER
+   ─────────────────────────────────────────────────────────────── */
+.master-info-card {
+  background: #00445e;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12); }
+  .master-info-card__header {
+    background: #002635;
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em; }
+    .master-info-card__header i {
+      margin-right: 0.4rem; }
+  .master-info-card__list {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    .master-info-card__list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 0.55rem 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.83rem; }
+      .master-info-card__list li:last-child {
+        border-bottom: none; }
+      .master-info-card__list li .label {
+        color: rgba(255, 255, 255, 0.65);
+        min-width: 110px;
+        flex-shrink: 0; }
+      .master-info-card__list li .value {
+        color: #fff;
+        font-weight: 500; }
+        .master-info-card__list li .value a {
+          color: rgba(255, 255, 255, 0.85);
+          text-decoration: underline; }
+          .master-info-card__list li .value a:hover {
+            color: #fff; }
+
+.master-docs__title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6b6b6b;
+  margin-bottom: 0.75rem; }
+
+.master-docs__item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.4rem;
+  background: #f8f9fa;
+  border-radius: 4px;
+  border: 1px solid #e3e3e3;
+  font-size: 0.82rem;
+  color: #333333;
+  transition: background 0.15s; }
+  .master-docs__item:hover {
+    background: #eef0f2;
+    color: #bc052d;
+    text-decoration: none; }
+  .master-docs__item i {
+    color: #bc052d;
+    flex-shrink: 0; }
+  .master-docs__item .name {
+    flex: 1;
+    font-weight: 500; }
+  .master-docs__item .size {
+    color: #6b6b6b;
+    font-size: 0.75rem; }
+
+.parcours-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem; }
+  @media (max-width: 991px) {
+    .parcours-grid {
+      grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 575px) {
+    .parcours-grid {
+      grid-template-columns: 1fr; } }
+.parcours-card {
+  background: #fff;
+  border-top: 3px solid #bc052d;
+  border-radius: 4px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); }
+  .parcours-card__name {
+    font-size: 0.95rem;
+    color: #bc052d;
+    margin-bottom: 0.6rem; }
+  .parcours-card__content {
+    font-size: 0.87rem;
+    color: #555;
+    margin-bottom: 0.75rem; }
+  .parcours-card__referent {
+    font-size: 0.82rem;
+    color: #00445e;
+    font-weight: 600;
+    margin: 0; }
+    .parcours-card__referent i {
+      margin-right: 0.3rem;
+      opacity: 0.7; }
+  .parcours-card--custom {
+    border-top-color: #00445e; }
+    .parcours-card--custom .parcours-card__name {
+      color: #00445e; }
+
+.programme-tabs__nav .nav-link {
+  color: #00445e;
+  font-weight: 600;
+  border-radius: 30px;
+  padding: 0.4rem 1.5rem;
+  border: 2px solid #00445e;
+  margin-right: 0.5rem; }
+  .programme-tabs__nav .nav-link.active {
+    background: #00445e;
+    color: #fff;
+    border-color: #00445e; }
+  .programme-tabs__nav .nav-link:hover:not(.active) {
+    background: #91e1ff; }
+
+.programme-accordion__item {
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  overflow: hidden; }
+
+.programme-accordion__header {
+  background: #fff; }
+
+.programme-accordion__btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0.85rem 1.25rem;
+  text-align: left;
+  cursor: pointer;
+  gap: 0.75rem; }
+  .programme-accordion__btn:focus {
+    outline: none; }
+  .programme-accordion__btn .sem-title {
+    flex: 1;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: #00445e;
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif; }
+  .programme-accordion__btn .sem-meta {
+    font-size: 0.78rem;
+    color: #6b6b6b;
+    white-space: nowrap; }
+  .programme-accordion__btn i {
+    color: #00445e;
+    font-size: 0.7rem;
+    transition: transform 0.2s; }
+  .programme-accordion__btn:not(.collapsed) i {
+    transform: rotate(180deg); }
+  .programme-accordion__btn:not(.collapsed) {
+    background: #91e1ff; }
+
+.programme-accordion__body {
+  padding: 0 1rem 1rem;
+  overflow-x: auto; }
+
+table.programme-table {
+  width: 100%;
+  font-size: 0.9rem;
+  border-collapse: collapse;
+  margin: 0.25rem 0 0.5rem;
+  background: transparent; }
+  table.programme-table thead th,
+  table.programme-table thead td {
+    background: transparent;
+    color: #6b6b6b;
+    padding: 0.65rem 0.75rem;
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-align: left;
+    border-bottom: 1px solid #e5e5e5; }
+    table.programme-table thead th:nth-child(2), table.programme-table thead th:nth-child(3), table.programme-table thead th:nth-child(4),
+    table.programme-table thead td:nth-child(2),
+    table.programme-table thead td:nth-child(3),
+    table.programme-table thead td:nth-child(4) {
+      text-align: right; }
+  table.programme-table .cours-row td {
+    padding: 0.7rem 0.75rem;
+    border-bottom: 1px solid #efefef;
+    vertical-align: top;
+    color: #333333; }
+  table.programme-table .cours-row:last-child td {
+    border-bottom: none; }
+  table.programme-table .cours-row .cours-name {
+    font-weight: 500;
+    color: #1a1a1a;
+    line-height: 1.45; }
+  table.programme-table .cours-row .cours-lang {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b6b6b;
+    text-align: right;
+    white-space: nowrap; }
+  table.programme-table .cours-row .cours-h {
+    font-variant-numeric: tabular-nums;
+    color: #6b6b6b;
+    text-align: right;
+    white-space: nowrap; }
+  table.programme-table .cours-row .cours-ects {
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    white-space: nowrap;
+    color: #6b6b6b; }
+    table.programme-table .cours-row .cours-ects strong {
+      display: inline-block;
+      font-weight: 600;
+      color: #bc052d; }
+  table.programme-table .sous-cours-row td {
+    padding: 0.35rem 0.75rem 0.35rem 1.75rem;
+    border-bottom: 1px solid #f5f5f5;
+    font-size: 0.83rem;
+    color: #6b6b6b;
+    position: relative; }
+    table.programme-table .sous-cours-row td em {
+      font-style: normal; }
+    table.programme-table .sous-cours-row td::before {
+      content: "";
+      position: absolute;
+      left: 0.9rem;
+      top: 0.85rem;
+      width: 0.55rem;
+      height: 1px;
+      background: #d0d0d0; }
+
+.debouche-card {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  background: #fff;
+  border-radius: 6px;
+  height: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s, transform 0.2s; }
+  .debouche-card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px); }
+  .debouche-card__icon {
+    display: block;
+    font-size: 2rem;
+    color: #bc052d;
+    margin-bottom: 1rem; }
+  .debouche-card__title {
+    font-size: 0.95rem;
+    color: #00445e;
+    margin-bottom: 0.75rem; }
+  .debouche-card__content {
+    font-size: 0.87rem;
+    color: #555;
+    margin: 0; }
+
+.admission-subtitle {
+  font-size: 1rem;
+  color: #00445e;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid #78daff; }
+
+.timeline-admission {
+  position: relative;
+  padding-left: 1.5rem; }
+  .timeline-admission::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: #5ed2ff; }
+  .timeline-admission__step {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    position: relative; }
+  .timeline-admission__dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #00445e;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px #00445e;
+    flex-shrink: 0;
+    margin-left: -1.5rem;
+    margin-top: 3px; }
+  .timeline-admission__content {
+    display: flex;
+    flex-direction: column; }
+  .timeline-admission__date {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #bc052d;
+    text-transform: uppercase;
+    letter-spacing: 0.04em; }
+  .timeline-admission__label {
+    font-size: 0.9rem;
+    color: #333333; }
+
+.admission-list {
+  padding-left: 1.2rem; }
+  .admission-list li {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem; }
+
+.frais-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem; }
+  @media (max-width: 575px) {
+    .frais-grid {
+      grid-template-columns: 1fr; } }
+.frais-item {
+  background: #f8f9fa;
+  border-radius: 4px;
+  padding: 0.6rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.83rem; }
+  .frais-item--intl {
+    grid-column: span 2;
+    background: #9be3ff; }
+    @media (max-width: 575px) {
+      .frais-item--intl {
+        grid-column: span 1; } }
+  .frais-item .frais-label {
+    color: #6b6b6b;
+    font-size: 0.78rem;
+    margin-bottom: 0.15rem; }
+  .frais-item .frais-value {
+    font-weight: 700;
+    color: #00445e;
+    font-size: 0.9rem; }
+
+.person-card {
+  text-align: center; }
+  .person-card__photo {
+    width: 100%;
+    padding-bottom: 100%;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #f5f2ef;
+    margin-bottom: 0.75rem; }
+  .person-card__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top; }
+  .person-card__placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #78daff; }
+    .person-card__placeholder i {
+      font-size: 2rem;
+      color: #00445e;
+      opacity: 0.5; }
+  .person-card__info {
+    padding: 0 0.25rem; }
+  .person-card__name {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: #333333;
+    margin: 0 0 0.2rem;
+    line-height: 1.3; }
+  .person-card__role {
+    font-size: 0.75rem;
+    color: #6b6b6b;
+    margin: 0;
+    line-height: 1.3; }
+
+.partenaire-card {
+  background: #fff;
+  border-left: 3px solid #bc052d;
+  border-radius: 4px;
+  padding: 1.25rem;
+  height: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); }
+  .partenaire-card h3, .partenaire-card h4, .partenaire-card h5, .partenaire-card .partenaire-card__title {
+    color: #00445e;
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem; }
+  .partenaire-card p {
+    font-size: 0.87rem;
+    color: #555;
+    margin: 0; }
+
+.placeholder-card {
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  height: 100%; }
+  .placeholder-card__img {
+    width: 100%;
+    background: #78daff; }
+    .placeholder-card__img--memoire, .placeholder-card__img--news {
+      height: 140px; }
+    .placeholder-card__img--project {
+      height: 100px; }
+  .placeholder-card__body {
+    padding: 0.75rem; }
+  .placeholder-card__tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #bc052d;
+    margin-bottom: 0.3rem; }
+  .placeholder-card__title {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #333333;
+    margin: 0 0 0.25rem;
+    line-height: 1.3; }
+  .placeholder-card__meta {
+    font-size: 0.78rem;
+    color: #6b6b6b;
+    margin: 0; }
+
+.phase-timeline {
+  max-width: 780px;
+  margin: 0 auto; }
+
+.phase-solo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #f5f5f5;
+  border-radius: 6px;
+  padding: 0.5rem 0.9rem;
+  margin-bottom: 0.5rem; }
+  .phase-solo--full {
+    display: flex;
+    width: 100%;
+    background: #91e1ff;
+    border-left: 3px solid #00445e; }
+    .phase-solo--full .phase-solo__period {
+      color: #00445e; }
+  .phase-solo__year {
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #bc052d;
+    background: rgba(188, 5, 45, 0.1);
+    padding: 0.15rem 0.45rem;
+    border-radius: 3px; }
+  .phase-solo__period {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #6b6b6b;
+    text-transform: uppercase;
+    letter-spacing: 0.04em; }
+  .phase-solo__label {
+    font-size: 0.85rem;
+    color: #666; }
+
+.phase-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0; }
+  .phase-divider::before, .phase-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #ddd; }
+  .phase-divider__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: #00445e;
+    background: #a0e5ff;
+    border: 1px solid #45cbff;
+    padding: 0.35rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    white-space: nowrap; }
+    .phase-divider__badge i {
+      font-size: 0.75rem; }
+
+.phase-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 0.5rem; }
+  @media (max-width: 575px) {
+    .phase-row {
+      grid-template-columns: 1fr; } }
+.phase-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.1rem 1.2rem;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04); }
+  .phase-card--m1 {
+    border-top: 2px solid rgba(188, 5, 45, 0.4); }
+  .phase-card--m2 {
+    border-top: 2px solid rgba(0, 68, 94, 0.4); }
+  .phase-card--rendu {
+    background: #fafafa; }
+    .phase-card--rendu .phase-card__title {
+      color: #6b6b6b;
+      font-size: 0.9rem; }
+  .phase-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b6b6b; }
+  .phase-card__year {
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 0.12rem 0.4rem;
+    border-radius: 3px; }
+    .phase-card--m1 .phase-card__year {
+      background: rgba(188, 5, 45, 0.1);
+      color: #bc052d; }
+    .phase-card--m2 .phase-card__year {
+      background: rgba(0, 68, 94, 0.1);
+      color: #00445e; }
+  .phase-card__title {
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #333333;
+    margin: 0 0 0.45rem;
+    line-height: 1.3; }
+  .phase-card__desc {
+    font-size: 0.83rem;
+    color: #6b6b6b;
+    margin: 0;
+    line-height: 1.5; }
+
+.partenaires-logos {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e3e3e3; }
+  .partenaires-logos__label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #6b6b6b;
+    font-weight: 600;
+    width: 100%; }
+    @media (min-width: 576px) {
+      .partenaires-logos__label {
+        width: auto; } }
+  .partenaires-logos__img {
+    height: 36px !important;
+    width: auto !important;
+    max-width: 120px !important;
+    object-fit: contain;
+    opacity: 0.85;
+    transition: opacity 0.15s; }
+    .partenaires-logos__img:hover {
+      opacity: 1; }
+
+.rythme-semaine {
+  margin: 1.25rem 0 0; }
+  .rythme-semaine__title {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #6b6b6b;
+    font-weight: 600;
+    margin-bottom: 0.5rem; }
+  .rythme-semaine__days {
+    display: flex;
+    gap: 4px;
+    border-radius: 6px;
+    overflow: hidden; }
+  .rythme-semaine__day {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.6rem 0.25rem;
+    gap: 0.25rem; }
+    .rythme-semaine__day--entreprise {
+      background: #68d5ff; }
+    .rythme-semaine__day--ecole {
+      background: #bc052d; }
+  .rythme-semaine__day-name {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.03em; }
+    .rythme-semaine__day--entreprise .rythme-semaine__day-name {
+      color: #00445e; }
+    .rythme-semaine__day--ecole .rythme-semaine__day-name {
+      color: #fff; }
+  .rythme-semaine__day-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em; }
+    .rythme-semaine__day--entreprise .rythme-semaine__day-label {
+      color: #003245; }
+    .rythme-semaine__day--ecole .rythme-semaine__day-label {
+      color: rgba(255, 255, 255, 0.85); }
+  .rythme-semaine__legend {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem; }
+  .rythme-semaine__legend-item {
+    font-size: 0.72rem;
+    color: #6b6b6b;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem; }
+    .rythme-semaine__legend-item::before {
+      content: '';
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      flex-shrink: 0; }
+    .rythme-semaine__legend-item--entreprise::before {
+      background: #68d5ff;
+      border: 1px solid #00b3f7; }
+    .rythme-semaine__legend-item--ecole::before {
+      background: #bc052d; }
+
+.feature-icon-img {
+  display: block;
+  height: 60px;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+  margin-left: auto;
+  margin-right: auto; }
+  @media (min-width: 576px) {
+    .feature-icon-img {
+      margin-left: 0;
+      margin-right: 0; } }
+.d-flex.section-title a.btn,
+.d-flex.align-items-center.section-title a.btn {
+  flex-shrink: 0;
+  overflow: visible;
+  white-space: nowrap; }
+
+.rythme-mini {
+  display: flex;
+  gap: 3px;
+  margin-top: 0.75rem; }
+  .rythme-mini__day {
+    flex: 1;
+    text-align: center;
+    font-size: 0.62rem;
+    font-weight: 700;
+    padding: 0.25rem 0;
+    border-radius: 3px; }
+    .rythme-mini__day--e {
+      background: #82dcff;
+      color: #00445e; }
+    .rythme-mini__day--m {
+      background: rgba(188, 5, 45, 0.12);
+      color: #bc052d; }
+
+.apprentissage-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  font-size: 0.83rem;
+  color: #6b6b6b; }
+  .apprentissage-note i {
+    flex-shrink: 0;
+    color: #00445e;
+    margin-top: 2px; }
+  .apprentissage-note p {
+    margin: 0;
+    line-height: 1.5; }
+
+.apprentissage-calendrier {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  background: #91e1ff;
+  border-left: 3px solid #00445e;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+  font-size: 0.88rem;
+  color: #00445e; }
+  .apprentissage-calendrier i {
+    flex-shrink: 0;
+    margin-top: 2px; }
+  .apprentissage-calendrier span {
+    font-weight: 500; }
+
+.apprentissage-tarifs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 0.5rem; }
+  @media (max-width: 575px) {
+    .apprentissage-tarifs {
+      grid-template-columns: 1fr; } }
+.apprentissage-tarif {
+  background: #f8f9fa;
+  border-radius: 6px;
+  padding: 1rem;
+  border-top: 3px solid #bc052d;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem; }
+  .apprentissage-tarif__secteur {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6b6b6b;
+    font-weight: 600; }
+  .apprentissage-tarif__prix {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #bc052d;
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    line-height: 1; }
+  .apprentissage-tarif__note {
+    font-size: 0.75rem;
+    color: #6b6b6b; }
+
+.competences-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; }
+
+.competence-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding: 0.75rem 1rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+  transition: background 0.15s; }
+  .competence-item:hover {
+    background: #eef0f2; }
+  .competence-item__icon {
+    font-size: 1.1rem;
+    color: #bc052d;
+    flex-shrink: 0;
+    margin-top: 2px; }
+  .competence-item__label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #333333;
+    margin: 0 0 0.15rem; }
+  .competence-item__detail {
+    font-size: 0.82rem;
+    color: #6b6b6b;
+    margin: 0;
+    line-height: 1.4; }
+
+.actu-subsection-title {
+  font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #00445e;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 1.25rem;
+  border-left: 3px solid #bc052d;
+  padding-left: 0.75rem; }
+
+.actu-card {
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.07);
+  height: 100%;
+  display: flex;
+  flex-direction: column; }
+  .actu-card__img {
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    background-color: #f5f2ef; }
+  .actu-card__body {
+    padding: 1.1rem 1.25rem 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column; }
+  .actu-card__tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #bc052d;
+    background: rgba(188, 5, 45, 0.08);
+    border-radius: 3px;
+    padding: 0.15em 0.5em;
+    margin-bottom: 0.6rem; }
+  .actu-card__title {
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 0.4rem;
+    line-height: 1.4; }
+  .actu-card__meta {
+    font-size: 0.8rem;
+    color: #6b6b6b;
+    margin: 0 0 0.75rem; }
+  .actu-card__link {
+    margin-top: auto;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #bc052d;
+    text-decoration: none; }
+    .actu-card__link:hover {
+      text-decoration: underline; }
+
+.equipe-category-title {
+  font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #00445e;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #bc052d;
+  display: inline-block; }
+
+.equipe-master-section {
+  border-top: 3px solid #bc052d; }
+
+.publications-count {
+  font-size: 0.95rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e3e3e3; }
+
+.publications-year {
+  margin-bottom: 2.5rem; }
+  .publications-year__title {
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #bc052d;
+    border-left: 4px solid #bc052d;
+    padding-left: 0.75rem;
+    margin-bottom: 1.25rem; }
+
+.publications-list {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
+.publication-item {
+  padding: 1.1rem 0;
+  border-bottom: 1px solid #e3e3e3; }
+  .publication-item:last-child {
+    border-bottom: none; }
+  .publication-item__title {
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 0.35rem;
+    line-height: 1.4; }
+    .publication-item__title a {
+      color: inherit;
+      text-decoration: none; }
+      .publication-item__title a:hover {
+        color: #bc052d;
+        text-decoration: underline; }
+  .publication-item__authors {
+    font-size: 0.9rem;
+    color: #6b6b6b;
+    margin: 0 0 0.3rem; }
+  .publication-item__meta {
+    font-size: 0.85rem;
+    color: #6b6b6b;
+    margin: 0; }
+    .publication-item__meta em {
+      color: #00445e; }
+  .publication-item__type {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #bc052d;
+    background: rgba(188, 5, 45, 0.08);
+    border-radius: 3px;
+    padding: 0.12em 0.5em;
+    margin-left: 0.5rem;
+    vertical-align: middle; }
+
+.publications-filters {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e3e3e3; }
+
+.publications-search {
+  display: block;
+  width: 100%;
+  padding: 0.7rem 1rem;
+  font-size: 0.95rem;
+  font-family: "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  color: #333333;
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  margin-bottom: 1rem; }
+  .publications-search:focus {
+    outline: none;
+    border-color: #bc052d;
+    box-shadow: 0 0 0 3px rgba(188, 5, 45, 0.12); }
+  .publications-search::placeholder {
+    color: #6b6b6b;
+    font-style: italic; }
+
+.publications-domains {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.5rem; }
+
+.domain-pill {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  color: #333333;
+  background: #f5f2ef;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.32em 0.95em;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s; }
+  .domain-pill:hover {
+    background: #ede8e2;
+    color: #bc052d; }
+  .domain-pill.active {
+    background: #bc052d;
+    color: #fff;
+    border-color: #bc052d; }
+
+.publications-empty {
+  text-align: center;
+  font-style: italic;
+  color: #6b6b6b;
+  padding: 2rem 0; }
+
+.openscience-section {
+  background: #00445e;
+  padding: 3rem 0; }
+
+.openscience-heading {
+  font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.35rem; }
+
+.openscience-intro {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+  margin-bottom: 0; }
+
+.openscience-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  padding: 2.25rem 2rem 1.75rem;
+  height: 100%;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s; }
+  .openscience-card:hover {
+    background: rgba(255, 255, 255, 0.13);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+    text-decoration: none; }
+  .openscience-card__logo {
+    height: 62px;
+    width: auto;
+    margin-bottom: 1.4rem; }
+    .openscience-card__logo--light {
+      filter: brightness(0) invert(1); }
+  .openscience-card__icon {
+    height: 62px;
+    width: 62px;
+    margin-bottom: 1.4rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 2.6rem;
+    line-height: 1; }
+  .openscience-card__name {
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.65rem; }
+  .openscience-card__desc {
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.55;
+    margin-bottom: 1.25rem; }
+  .openscience-card__cta {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    padding-bottom: 1px;
+    margin-top: auto; }
+
+.openscience-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #e3e3e3; }
+  .openscience-strip__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    text-decoration: none;
+    color: #333333;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.45rem 1.1rem;
+    border-radius: 6px;
+    border: 1px solid #e3e3e3;
+    transition: border-color 0.15s, color 0.15s, box-shadow 0.15s; }
+    .openscience-strip__link:hover {
+      border-color: #00445e;
+      color: #00445e;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
+  .openscience-strip__logo {
+    height: 20px;
+    width: auto; }
+    .openscience-strip__logo--dark {
+      filter: brightness(0); }
+
+.footer-platforms {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem; }
+
+.footer-platform-link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.2s; }
+  .footer-platform-link:hover {
+    opacity: 1;
+    text-decoration: none; }
+  .footer-platform-link p {
+    margin: 0;
+    line-height: 1.3; }
+
+.footer-platform-logo {
+  height: 36px;
+  width: 36px;
+  object-fit: contain;
+  flex-shrink: 0; }
+  .footer-platform-logo--light {
+    filter: brightness(0) invert(1); }
+
+.footer-platform-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff !important; }
+
+.footer-platform-desc {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.55) !important; }
+
+.footer-copyright-logos {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem; }
+
+.footer-copyright-logo-link {
+  opacity: 0.6;
+  transition: opacity 0.2s; }
+  .footer-copyright-logo-link:hover {
+    opacity: 1; }
+
+.footer-copyright-logo {
+  height: 24px;
+  width: auto;
+  display: block; }
+  .footer-copyright-logo--light {
+    filter: brightness(0) invert(1); }
+
+/* ── Projets : tuiles ── */
+.projects-intro {
+  font-size: 1.05rem;
+  color: #444; }
+
+.projects-section-title {
+  font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  font-size: 1.6rem;
+  color: #00445e;
+  border-left: 4px solid #bc052d;
+  padding-left: 14px;
+  margin-bottom: 1.5rem; }
+
+.project-card {
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease, transform 0.2s ease; }
+  .project-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px); }
+  .project-card__media {
+    position: relative;
+    width: 100%;
+    padding-top: 56%;
+    /* ratio ~16/9 */
+    background: #f3f3f3;
+    overflow: hidden; }
+  .project-card__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; }
+  .project-card__placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #bbb;
+    font-size: 2.5rem; }
+  .project-card__funding {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.7rem;
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.55rem;
+    border-radius: 2px;
+    text-transform: uppercase; }
+    .project-card__funding--anr {
+      background: #003566; }
+    .project-card__funding--erc {
+      background: #003399; }
+  .project-card__body {
+    padding: 1.1rem 1.2rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1; }
+  .project-card__tags {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.6rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem; }
+  .project-card__tag {
+    display: inline-block;
+    background: rgba(188, 5, 45, 0.08);
+    color: #bc052d;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.55rem;
+    border-radius: 2px; }
+  .project-card__title {
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: 1.15rem;
+    line-height: 1.3;
+    color: #00445e;
+    margin: 0 0 0.7rem 0; }
+  .project-card__meta {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+    font-size: 0.88rem;
+    color: #555; }
+    .project-card__meta li {
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem; }
+    .project-card__meta i {
+      color: #bc052d; }
+  .project-card__cta {
+    margin-top: auto;
+    align-self: flex-start;
+    color: #bc052d;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s; }
+    .project-card__cta:hover {
+      color: #bc052d;
+      border-bottom-color: #bc052d;
+      text-decoration: none; }
+    .project-card__cta span {
+      transition: transform 0.2s;
+      display: inline-block; }
+    .project-card__cta:hover span {
+      transform: translateX(3px); }
+
+/* ────────────────────────────────────────────────────────────
+   Recentrage site master HN — ajouts
+   ──────────────────────────────────────────────────────────── */
+/* — Page équipe : carte cliquable — */
+.person-card--link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s; }
+  .person-card--link:hover {
+    transform: translateY(-3px);
+    text-decoration: none;
+    color: inherit; }
+    .person-card--link:hover .person-card__name {
+      color: #bc052d; }
+
+/* — Mini-page d'un enseignant — */
+.teacher-profile__sidebar {
+  text-align: center;
+  position: sticky;
+  top: 90px; }
+
+.teacher-profile__photo {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 1.25rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #f5f2ef;
+  position: relative; }
+
+.teacher-profile__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; }
+
+.teacher-profile__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #bbb;
+  font-size: 3rem; }
+
+.teacher-profile__name {
+  font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  font-size: 1.6rem;
+  color: #00445e;
+  margin: 0 0 0.4rem;
+  line-height: 1.2; }
+
+.teacher-profile__institution {
+  font-size: 0.95rem;
+  color: #6b6b6b;
+  margin: 0 0 1rem; }
+
+.teacher-profile__disciplines {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center; }
+  .teacher-profile__disciplines li {
+    display: inline-block;
+    background: rgba(188, 5, 45, 0.08);
+    color: #bc052d;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px; }
+
+.teacher-profile__website {
+  margin: 1rem 0 0;
+  text-align: center; }
+  .teacher-profile__website .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem; }
+  .teacher-profile__website i {
+    font-size: 0.9rem; }
+
+.teacher-profile__links {
+  list-style: none;
+  padding: 0;
+  margin: 0.85rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  justify-content: center;
+  font-size: 0.9rem; }
+  .teacher-profile__links a {
+    color: #00445e;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem; }
+    .teacher-profile__links a:hover {
+      color: #bc052d;
+      border-bottom-color: #bc052d;
+      text-decoration: none; }
+
+.teacher-profile__bio {
+  margin-bottom: 2rem; }
+
+.teacher-profile__section {
+  margin-bottom: 2.5rem; }
+
+.teacher-profile__heading {
+  font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  font-size: 1.25rem;
+  color: #00445e;
+  border-left: 4px solid #bc052d;
+  padding-left: 0.75rem;
+  margin-bottom: 1.25rem; }
+
+.teacher-profile__courses {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+  .teacher-profile__courses li {
+    padding: 0.55rem 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem; }
+    .teacher-profile__courses li:last-child {
+      border-bottom: none; }
+
+.teacher-profile__memoires {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
+.memoire-item {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 0 0.75rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid #eee;
+  align-items: baseline; }
+  .memoire-item:last-child {
+    border-bottom: none; }
+  .memoire-item__year {
+    font-weight: 700;
+    color: #bc052d;
+    font-size: 0.95rem; }
+  .memoire-item__content {
+    display: block; }
+  .memoire-item__title {
+    font-size: 0.95rem;
+    line-height: 1.4; }
+    .memoire-item__title a {
+      color: #1a1a1a;
+      text-decoration: none;
+      border-bottom: 1px solid transparent; }
+      .memoire-item__title a:hover {
+        color: #bc052d;
+        border-bottom-color: #bc052d;
+        text-decoration: none; }
+  .memoire-item__level {
+    display: inline-block;
+    margin-left: 0.4rem;
+    padding: 0.05rem 0.4rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border-radius: 2px;
+    vertical-align: middle; }
+    .memoire-item__level--m1 {
+      background: rgba(0, 68, 94, 0.12);
+      color: #00445e; }
+    .memoire-item__level--m2 {
+      background: rgba(188, 5, 45, 0.12);
+      color: #bc052d; }
+  .memoire-item__student {
+    display: block;
+    color: #6b6b6b;
+    font-size: 0.88rem;
+    font-style: italic;
+    margin-top: 0.15rem; }
+  .memoire-item__codir {
+    display: block;
+    color: #6b6b6b;
+    font-size: 0.8rem;
+    margin-top: 0.1rem; }
+    .memoire-item__codir::before {
+      content: "↳";
+      margin-right: 0.3rem;
+      color: #bc052d;
+      font-style: normal; }
+
+/* — Actualités : carte unifiée billet/conférence — */
+.actu-card__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.92);
+  /* fond sobre par catégorie + motif rayé subtil */
+  background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.04) 0 10px, transparent 10px 22px), #00445e; }
+  .actu-card__media--hackathon {
+    background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0 10px, transparent 10px 22px), #b8651f; }
+  .actu-card__media--conference {
+    background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.04) 0 10px, transparent 10px 22px), #00445e; }
+  .actu-card__media--publication {
+    background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0 10px, transparent 10px 22px), #bc052d; }
+
+.actu-card__icon {
+  font-size: 3.2rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1; }
+
+.actu-card__kind {
+  position: absolute;
+  top: 0.65rem;
+  left: 0.65rem;
+  background: rgba(0, 0, 0, 0.32);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 2px; }
+
+.actu-card__acronym {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  background: rgba(255, 255, 255, 0.95);
+  color: #00445e;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.22rem 0.55rem;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); }
+
+.actu-card__lead {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 0.5rem; }
+
+.actu-card__acronym-lead {
+  font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #00445e;
+  line-height: 1.15;
+  letter-spacing: 0.01em; }
+
+.actu-card__kind-inline {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  background: rgba(0, 68, 94, 0.08);
+  color: #00445e; }
+  .actu-card__kind-inline--hackathon {
+    background: rgba(184, 101, 31, 0.13);
+    color: #b8651f; }
+  .actu-card__kind-inline--conference {
+    background: rgba(0, 68, 94, 0.1);
+    color: #00445e; }
+  .actu-card__kind-inline--publication {
+    background: rgba(188, 5, 45, 0.1);
+    color: #bc052d; }
+
+.actu-card__title {
+  font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  line-height: 1.4;
+  margin: 0 0 0.6rem; }
+  .actu-card__title a {
+    color: inherit;
+    text-decoration: none; }
+    .actu-card__title a:hover {
+      color: #bc052d;
+      text-decoration: none; }
+
+.actu-card__summary {
+  font-size: 0.85rem;
+  color: #6b6b6b;
+  line-height: 1.5;
+  margin: 0 0 0.75rem; }
+
+.actu-card__date {
+  font-size: 0.75rem;
+  color: #6b6b6b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid #eee; }
+
+/* — Développements : carte sur fond clair (override openscience-card) — */
+.openscience-card--light {
+  background: #fff;
+  border: 1px solid #e6e6e6; }
+  .openscience-card--light:hover {
+    background: #fafafa;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08); }
+  .openscience-card--light .openscience-card__name {
+    color: #00445e; }
+  .openscience-card--light .openscience-card__desc {
+    color: #555; }
+  .openscience-card--light .openscience-card__cta {
+    color: #bc052d;
+    border-bottom-color: rgba(188, 5, 45, 0.4); }
+  .openscience-card--light .openscience-card__logo--invert {
+    filter: none; }
+  .openscience-card--light .openscience-card__icon--solid {
+    color: #bc052d; }
+
+/* — Bandeau logos sur la home (établissements / financements / partenaires) — */
+.home-logos-section {
+  background: #fff; }
+
+.home-logos-section__heading {
+  font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  font-size: 1.6rem;
+  color: #00445e;
+  text-align: center;
+  margin-bottom: 0.6rem; }
+
+.home-logos-section__intro {
+  text-align: center;
+  color: #6b6b6b;
+  font-size: 0.95rem;
+  max-width: 760px;
+  margin: 0 auto 2rem;
+  line-height: 1.55; }
+
+.home-logos-group {
+  margin-bottom: 1.8rem; }
+  .home-logos-group:last-child {
+    margin-bottom: 0; }
+  .home-logos-group__label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #6b6b6b;
+    text-align: center;
+    margin: 0 0 1rem; }
+    .home-logos-group__label::before, .home-logos-group__label::after {
+      content: "";
+      display: inline-block;
+      vertical-align: middle;
+      width: 32px;
+      height: 1px;
+      background: #ddd;
+      margin: 0 0.7rem; }
+  .home-logos-group__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem 2.25rem; }
+  .home-logos-group__item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.15s, transform 0.15s; }
+    .home-logos-group__item:hover {
+      opacity: 1;
+      transform: translateY(-2px); }
+  .home-logos-group__img {
+    height: 56px !important;
+    width: auto !important;
+    max-width: 180px !important;
+    object-fit: contain;
+    opacity: 0.85;
+    transition: opacity 0.15s; }
+    .home-logos-group__img:hover {
+      opacity: 1; }
+
+/* — Mention du cadre pédagogique, pied de la page d'accueil — */
+/* Volontairement discret, mais : taille en rem (zoom 200 % — RGAA 10.4) et
+   $text-color-light sur blanc = 5,33:1, au-dessus du seuil de 4,5:1 (RGAA 3.2). */
+.home-pedago-note {
+  background: #fff;
+  padding: 0 0 1.75rem; }
+  .home-pedago-note p {
+    max-width: 760px;
+    margin: 0 auto;
+    padding-top: 1.25rem;
+    border-top: 1px solid #e8e8e8;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: #6b6b6b;
+    text-align: center; }
+
+/* — Junior entreprise (section sur la home/master) — */
+.junior-section .section-title {
+  font-size: 1.6rem;
+  line-height: 1.3;
+  border-left: 4px solid #bc052d;
+  padding-left: 0.85rem; }
+
+.junior-logo-link {
+  display: inline-block; }
+
+.junior-logo {
+  max-width: 220px;
+  height: auto;
+  margin: 0 auto; }
+
+.junior-logo-placeholder {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px dashed #ccc;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+  font-size: 3rem; }
+
+.junior-content {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #333333; }
+  .junior-content p {
+    margin: 0 0 0.85rem; }
+  .junior-content strong {
+    color: #00445e; }
+
+/* — Cartes "Projets des étudiants" en home (mini-versions des hackathons) — */
+.student-project-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  transition: transform 0.2s; }
+  .student-project-card:hover {
+    text-decoration: none;
+    color: inherit;
+    transform: translateY(-3px); }
+    .student-project-card:hover .student-project-card__title {
+      color: #bc052d; }
+  .student-project-card__media {
+    width: 100%;
+    padding-top: 75%;
+    /* 4/3 carré-arrondi */
+    background: #f5f2ef;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 0.6rem; }
+  .student-project-card__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; }
+  .student-project-card__placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #bbb;
+    font-size: 2rem; }
+  .student-project-card__title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.35;
+    margin: 0;
+    /* clamp 3 lignes */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden; }
+
+/* ── Palette catégories (partagée cards + single) ───────────── */
+/* — Page single d'une actu (conférence / billet / hackathon) — */
+.actu-single {
+  /* Signature du billet. RGAA 3.2 — $text-color-light sur blanc = 5,33:1. */ }
+  .actu-single__header {
+    margin-bottom: 2rem; }
+  .actu-single__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 1rem; }
+  .actu-single__kind {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.28rem 0.65rem;
+    border-radius: 3px;
+    color: #bc052d;
+    background: rgba(188, 5, 45, 0.1); }
+    .actu-single__kind--hackathon {
+      color: #8d5913;
+      background: rgba(141, 89, 19, 0.12); }
+    .actu-single__kind--conference {
+      color: #00445e;
+      background: rgba(0, 68, 94, 0.1); }
+    .actu-single__kind--publication {
+      color: #bc052d;
+      background: rgba(188, 5, 45, 0.1); }
+    .actu-single__kind--papier {
+      color: #1a6e62;
+      background: rgba(26, 110, 98, 0.12); }
+    .actu-single__kind--competition {
+      color: #7f5f13;
+      background: rgba(127, 95, 19, 0.12); }
+    .actu-single__kind--compte-rendu {
+      color: #6b4c93;
+      background: rgba(107, 76, 147, 0.12); }
+    .actu-single__kind--bilan {
+      color: #3f5d8c;
+      background: rgba(63, 93, 140, 0.12); }
+  .actu-single__acronym {
+    display: inline-block;
+    background: rgba(0, 68, 94, 0.1);
+    color: #00445e;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 0.22rem 0.6rem;
+    border-radius: 2px; }
+  .actu-single__event {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #6b6b6b;
+    background: rgba(0, 68, 94, 0.07);
+    padding: 0.22rem 0.6rem;
+    border-radius: 2px; }
+    .actu-single__event i {
+      font-size: 0.8rem;
+      color: #00445e; }
+  .actu-single__date {
+    color: #6b6b6b;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-left: 0.25rem; }
+  .actu-single__title {
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: 2rem;
+    color: #00445e;
+    line-height: 1.25;
+    margin: 0 0 0.75rem; }
+  .actu-single__location {
+    color: #6b6b6b;
+    font-size: 0.95rem;
+    margin: 0; }
+    .actu-single__location i {
+      color: #bc052d;
+      margin-right: 0.3rem; }
+  .actu-single__author {
+    color: #6b6b6b;
+    font-size: 0.95rem;
+    margin: 0.4rem 0 0; }
+    .actu-single__author i {
+      color: #bc052d;
+      margin-right: 0.35rem; }
+  .actu-single__author-role {
+    font-size: 0.85rem;
+    margin-left: 0.3rem; }
+    .actu-single__author-role::before {
+      content: "("; }
+    .actu-single__author-role::after {
+      content: ")"; }
+  .actu-single__content {
+    font-size: 1rem;
+    line-height: 1.7;
+    /* Vraie citation (parole rapportée, extrait de texte). */
+    /* RGAA 8.9 / 9.4 — chapeau éditorial des comptes rendus, autrefois saisi
+       en citation Markdown pour obtenir cet encadré (détournement de
+       <blockquote>). Balisage désormais <p class="actu-chapeau">, rendu inchangé.
+       Points de reprise, mesurés sur le rendu précédent (public-v6) :
+       - `font-style: italic` reprend `.content blockquote p` du thème
+         (_common.scss) qui italisait le paragraphe interne ;
+       - pas de `font-size` ici : dans l'ancien balisage, le <p> interne était
+         déjà ramené à 16px/1.7 par la règle `p, .paragraph` (haut de ce
+         fichier), qui l'emportait sur le `0.95rem` hérité du <blockquote> ;
+       - sélectivité (0,2,0) obligatoire pour passer devant
+         `.actu-single__content p` (0,1,1) et `.content *` (0,1,0) du thème,
+         sinon la marge basse retombe à 1rem / 20px au lieu de 1.5rem.
+       Côté Markdown, le texte du chapeau commence sur la ligne SUIVANT la
+       balise ouvrante : ce saut de ligne remplace celui que goldmark plaçait
+       entre <blockquote> et <p>, et que `truncate` compte dans les résumés
+       tronqués des cartes de /blog/ et /actualites/. */ }
+    .actu-single__content p {
+      margin-bottom: 1rem; }
+    .actu-single__content img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 1.5rem auto;
+      border-radius: 4px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); }
+    .actu-single__content blockquote {
+      border-left: 3px solid #bc052d;
+      background: rgba(188, 5, 45, 0.04);
+      padding: 0.8rem 1.2rem;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+      color: #333333; }
+      .actu-single__content blockquote p:last-child {
+        margin-bottom: 0; }
+    .actu-single__content .actu-chapeau {
+      border-left: 3px solid #bc052d;
+      background: rgba(188, 5, 45, 0.04);
+      padding: 0.8rem 1.2rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: #333333; }
+  .actu-single__external {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee; }
+    .actu-single__external .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem; }
+
+/* — Hackathons 2026 (page développements) — */
+.hackathons-header {
+  margin-bottom: 2.5rem;
+  text-align: center; }
+
+.hackathons-section__title {
+  font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  font-size: 1.8rem;
+  color: #00445e;
+  margin: 0 0 0.5rem;
+  display: inline-block;
+  padding-bottom: 0.4rem;
+  border-bottom: 3px solid #bc052d; }
+
+.hackathons-section__intro {
+  color: #6b6b6b;
+  font-size: 0.95rem;
+  max-width: 720px;
+  margin: 0.75rem auto 0; }
+
+.hackathon-card {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease, transform 0.2s ease; }
+  .hackathon-card:hover {
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.09);
+    transform: translateY(-2px); }
+  .hackathon-card__media {
+    display: block;
+    width: 100%;
+    padding-top: 56%;
+    /* 16/9 */
+    background: #f5f2ef;
+    position: relative;
+    overflow: hidden; }
+  .hackathon-card__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; }
+  .hackathon-card__placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #bbb;
+    font-size: 2.5rem; }
+  .hackathon-card__body {
+    padding: 1rem 1.1rem 1.15rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1; }
+  .hackathon-card__partner {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #bc052d;
+    margin: 0 0 0.45rem;
+    line-height: 1.35; }
+  .hackathon-card__title {
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: 1rem;
+    line-height: 1.35;
+    color: #00445e;
+    margin: 0 0 0.6rem;
+    font-weight: 600; }
+    .hackathon-card__title a {
+      color: inherit;
+      text-decoration: none; }
+      .hackathon-card__title a:hover {
+        color: #bc052d;
+        text-decoration: none; }
+  .hackathon-card__team {
+    font-size: 0.8rem;
+    color: #6b6b6b;
+    line-height: 1.45;
+    margin: 0 0 0.85rem;
+    font-style: italic; }
+  .hackathon-card__cta {
+    margin-top: auto;
+    align-self: flex-start;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #bc052d;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-bottom: 1px solid transparent; }
+    .hackathon-card__cta:hover {
+      color: #bc052d;
+      border-bottom-color: #bc052d;
+      text-decoration: none; }
+    .hackathon-card__cta i {
+      font-size: 0.95rem; }
+
+/* — Mémoires de master (DUMAS) — */
+.memoire-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  /* Image cache le placeholder quand elle charge */ }
+  .memoire-card:hover {
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+    text-decoration: none;
+    color: inherit; }
+    .memoire-card:hover .memoire-card__title {
+      color: #bc052d; }
+  .memoire-card__media {
+    position: relative;
+    width: 100%;
+    padding-top: 130%;
+    /* couverture de mémoire en portrait */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.08) 100%), repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.06) 0 2px, transparent 2px 6px), #00445e;
+    overflow: hidden; }
+  .memoire-card__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    background: #fff; }
+  .memoire-card__img--missing {
+    display: none; }
+  .memoire-card__placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 3rem;
+    pointer-events: none; }
+  .memoire-card__img:not(.memoire-card__img--missing) + .memoire-card__placeholder {
+    display: none; }
+  .memoire-card__kind {
+    position: absolute;
+    top: 0.6rem;
+    left: 0.6rem;
+    background: #bc052d;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.55rem;
+    border-radius: 2px;
+    z-index: 2; }
+  .memoire-card__body {
+    padding: 1rem 1.1rem 1.15rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column; }
+  .memoire-card__title {
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #00445e;
+    margin: 0 0 0.4rem;
+    line-height: 1.35;
+    /* clamp 3 lignes */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden; }
+  .memoire-card__meta {
+    font-size: 0.82rem;
+    color: #6b6b6b;
+    margin: 0;
+    line-height: 1.4; }
+
+/* — Footer : logos partenaires — */
+/* Réduit la taille du logo principal du footer (Chartes-PSL blanc) */
+.logo-footer img {
+  max-width: 180px;
+  height: auto; }
+
+.footer-partners {
+  border-top: 1px solid rgba(255, 255, 255, 0.08); }
+  .footer-partners__row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center; }
+    @media (min-width: 768px) {
+      .footer-partners__row {
+        justify-content: flex-start; } }
+  .footer-partners__label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600; }
+  .footer-partners__logos {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.25rem; }
+  .footer-partners__img {
+    height: 38px !important;
+    width: auto !important;
+    max-width: 130px !important;
+    object-fit: contain;
+    background: #fff;
+    padding: 4px 8px;
+    border-radius: 3px;
+    opacity: 0.95;
+    transition: opacity 0.15s; }
+    .footer-partners__img:hover {
+      opacity: 1; }
+
+/* ── Fix menu mobile : empêche le débordement vertical ────────── */
+@media (max-width: 991px) {
+  .navbar-collapse {
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; } }
+
+/* ── Fix menu desktop : 7 items trop larges pour le container ── */
+@media (min-width: 992px) {
+  .nav-item {
+    margin: 0 5px !important; }
+  .navbar-expand-lg .navbar-nav .nav-link {
+    font-size: 12px;
+    letter-spacing: 0.02em; } }
+
+/* ── Menu desktop sur deux lignes tant qu'il ne tient pas sur une ──
+   Logo (372 px) + 8 entrées (~910 px) dépassent les 1110 px utiles du
+   .container : sans ce bloc, les dernières entrées sortaient de l'écran
+   en dessous de ~1500 px. Les entrées passent sur deux lignes dans le
+   bandeau rouge, sans changer la hauteur du header. */
+@media (min-width: 992px) and (max-width: 1499.98px) {
+  .navbar-nav {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    padding-left: 20px; }
+  .navigation .navbar-expand-lg .navbar-nav .nav-link {
+    padding-top: 16px;
+    padding-bottom: 15px; } }
+
+/* ── Participation card (actualités) ───────────────────────── */
+.participation-card {
+  border-radius: 8px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.09);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-top: 4px solid #bc052d;
+  width: 100%;
+  /* ── bandeau sobre (sur fond blanc) ── */
+  /* ── corps ── */ }
+  .participation-card--formation {
+    border-top-color: #00445e; }
+  .participation-card--hackathon {
+    border-top-color: #8d5913; }
+  .participation-card--papier {
+    border-top-color: #1a6e62; }
+  .participation-card--competition {
+    border-top-color: #7f5f13; }
+  .participation-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem 1.4rem 0;
+    flex-wrap: wrap;
+    gap: 0.5rem; }
+  .participation-card__type {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #bc052d;
+    background: rgba(188, 5, 45, 0.1);
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px; }
+  .participation-card--formation .participation-card__type {
+    color: #00445e;
+    background: rgba(0, 68, 94, 0.1); }
+  .participation-card--hackathon .participation-card__type {
+    color: #8d5913;
+    background: rgba(141, 89, 19, 0.12); }
+  .participation-card--papier .participation-card__type {
+    color: #1a6e62;
+    background: rgba(26, 110, 98, 0.12); }
+  .participation-card--competition .participation-card__type {
+    color: #7f5f13;
+    background: rgba(127, 95, 19, 0.12); }
+  .participation-card__date-lieu {
+    font-size: 0.78rem;
+    color: #6b6b6b;
+    font-weight: 500; }
+  .participation-card__sep {
+    margin: 0 0.3rem;
+    opacity: 0.6; }
+  .participation-card__body {
+    padding: 0.75rem 1.4rem 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column; }
+  .participation-card__title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    color: #1a1a1a;
+    margin-bottom: 0.65rem;
+    line-height: 1.3; }
+    .participation-card__title a {
+      color: inherit;
+      text-decoration: none; }
+      .participation-card__title a:hover {
+        color: #bc052d; }
+  .participation-card__participants {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-bottom: 0.75rem; }
+  .participation-card__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    font-size: 0.74rem;
+    font-weight: 600;
+    padding: 0.18rem 0;
+    color: #1a1a1a;
+    border-radius: 0;
+    background: none; }
+    .participation-card__chip--m1 {
+      color: #1a6e62; }
+    .participation-card__chip--m2 {
+      color: #bc052d; }
+    .participation-card__chip--enseignant {
+      color: #00445e; }
+  .participation-card__chip-role {
+    font-style: normal;
+    font-size: 0.65rem;
+    font-weight: 500;
+    opacity: 0.95;
+    margin-left: 0.25rem; }
+    .participation-card__chip-role::before {
+      content: "("; }
+    .participation-card__chip-role::after {
+      content: ")"; }
+  .participation-card__chip + .participation-card__chip::before {
+    content: "·";
+    margin: 0 0.35rem;
+    color: #bbb;
+    font-weight: 400; }
+  .participation-card__summary {
+    font-size: 0.86rem;
+    color: #333333;
+    line-height: 1.6;
+    margin: 0; }
+    .participation-card__summary p {
+      margin: 0; }
+    .participation-card__summary p + p {
+      margin-top: 0.5rem; }
+
+/* ── Billet card (actualités du blog) ──────────────────────── */
+/* Même largeur que participation-card mais visuel plus discret :
+   bande latérale gauche colorée + fond très clair teinté. */
+.billet-card {
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  background: #fff;
+  border-top: 4px solid #bc052d;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease, transform 0.2s ease; }
+  .billet-card:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px); }
+  .billet-card--hackathon {
+    border-top-color: #8d5913; }
+  .billet-card--conference {
+    border-top-color: #00445e; }
+  .billet-card--publication {
+    border-top-color: #bc052d; }
+  .billet-card--papier {
+    border-top-color: #1a6e62; }
+  .billet-card--competition {
+    border-top-color: #7f5f13; }
+  .billet-card--compte-rendu {
+    border-top-color: #6b4c93; }
+  .billet-card--bilan {
+    border-top-color: #3f5d8c; }
+  .billet-card__body {
+    padding: 1.1rem 1.4rem 1rem; }
+  .billet-card__meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem; }
+  .billet-card__type {
+    font-size: 0.66rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #bc052d;
+    background: rgba(188, 5, 45, 0.1);
+    padding: 0.18rem 0.55rem;
+    border-radius: 3px; }
+  .billet-card--hackathon .billet-card__type {
+    color: #8d5913;
+    background: rgba(141, 89, 19, 0.12); }
+  .billet-card--conference .billet-card__type {
+    color: #00445e;
+    background: rgba(0, 68, 94, 0.1); }
+  .billet-card--publication .billet-card__type {
+    color: #bc052d;
+    background: rgba(188, 5, 45, 0.1); }
+  .billet-card--papier .billet-card__type {
+    color: #1a6e62;
+    background: rgba(26, 110, 98, 0.12); }
+  .billet-card--competition .billet-card__type {
+    color: #7f5f13;
+    background: rgba(127, 95, 19, 0.12); }
+  .billet-card--compte-rendu .billet-card__type {
+    color: #6b4c93;
+    background: rgba(107, 76, 147, 0.12); }
+  .billet-card--bilan .billet-card__type {
+    color: #3f5d8c;
+    background: rgba(63, 93, 140, 0.12); }
+  .billet-card__event {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #6b6b6b;
+    background: rgba(0, 68, 94, 0.07);
+    padding: 0.18rem 0.5rem;
+    border-radius: 3px; }
+    .billet-card__event i {
+      font-size: 0.75rem;
+      color: #00445e; }
+  .billet-card__acronym {
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: 0.01em; }
+  .billet-card__date {
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: #6b6b6b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em; }
+  .billet-card__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    color: #1a1a1a;
+    margin: 0 0 0.5rem;
+    line-height: 1.35; }
+    .billet-card__title a {
+      color: inherit;
+      text-decoration: none; }
+      .billet-card__title a:hover {
+        color: #bc052d; }
+  .billet-card__summary {
+    font-size: 0.88rem;
+    color: #333333;
+    line-height: 1.6;
+    margin: 0; }
+    .billet-card__summary p {
+      margin: 0; }
+    .billet-card__summary p + p {
+      margin-top: 0.5rem; }
+
+/* ── Section "Dernières actualités" sur la home ─────────────── */
+.home-actus__heading {
+  text-align: center;
+  font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  margin-bottom: 0.5rem; }
+
+.home-actus__intro {
+  text-align: center;
+  color: #6b6b6b;
+  margin-bottom: 2rem; }
+
+.home-actus__more {
+  text-align: center;
+  margin-top: 1.5rem; }
+
+/* ── Évènements : journée d'étude + hackathons ──────────────── */
+.je-intro {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #333333;
+  text-align: center; }
+
+.evenement-block {
+  margin-bottom: 4rem;
+  padding-top: 1rem; }
+  .evenement-block + .evenement-block {
+    margin-top: 2rem;
+    padding-top: 3rem;
+    border-top: 1px dashed #d8d8d8; }
+  .evenement-block__header {
+    margin-bottom: 2rem; }
+  .evenement-block__title {
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: #bc052d;
+    margin: 0 0 0.5rem;
+    line-height: 1.2; }
+  .evenement-block__desc {
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: #333333;
+    margin: 0;
+    max-width: 880px; }
+
+.je-edition {
+  position: relative;
+  padding: 2.5rem 0 3rem;
+  border-top: 1px solid #e8e8e8; }
+  .je-edition:first-of-type {
+    border-top: none;
+    padding-top: 1rem; }
+  .je-edition__year {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #bc052d;
+    width: fit-content; }
+  .je-edition__year-num {
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #bc052d;
+    line-height: 1;
+    letter-spacing: -0.02em; }
+  .je-edition__year-status {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #6b6b6b;
+    background: #f3f3f3;
+    padding: 0.2rem 0.55rem;
+    border-radius: 2px; }
+  .je-edition--a-venir .je-edition__year-status {
+    color: #fff;
+    background: #00445e; }
+  .je-edition__colocated {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #00445e;
+    background: rgba(0, 68, 94, 0.08);
+    padding: 0.35rem 0.7rem;
+    border-radius: 3px;
+    margin-bottom: 1rem; }
+    .je-edition__colocated i {
+      font-size: 0.85rem; }
+  .je-edition__title {
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.25;
+    margin: 0 0 0.4rem; }
+  .je-edition__subtitle {
+    font-size: 1rem;
+    font-style: italic;
+    color: #6b6b6b;
+    margin-bottom: 1.25rem;
+    line-height: 1.4; }
+  .je-edition__meta {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem; }
+    .je-edition__meta li {
+      font-size: 0.92rem;
+      color: #333333;
+      margin-bottom: 0.35rem; }
+      .je-edition__meta li i {
+        color: #bc052d;
+        margin-right: 0.5rem;
+        font-size: 0.95rem; }
+  .je-edition__description {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #333333;
+    margin-bottom: 1.25rem; }
+    .je-edition__description p {
+      margin-bottom: 0.6rem; }
+  .je-edition__block {
+    margin-bottom: 1rem; }
+  .je-edition__block-title {
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #bc052d;
+    font-weight: 700;
+    margin-bottom: 0.4rem; }
+  .je-edition__list {
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+    .je-edition__list li {
+      font-size: 0.9rem;
+      color: #333333;
+      padding: 0.15rem 0; }
+      .je-edition__list li::before {
+        content: "·";
+        color: #bc052d;
+        margin-right: 0.5rem;
+        font-weight: 700; }
+  .je-edition__partners {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.2rem; }
+  .je-edition__partner {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #00445e;
+    background: rgba(0, 68, 94, 0.08);
+    border: 1px solid rgba(0, 68, 94, 0.15);
+    padding: 0.22rem 0.6rem;
+    border-radius: 14px;
+    line-height: 1.3; }
+  .je-edition__soutien {
+    font-size: 0.85rem;
+    color: #6b6b6b;
+    font-style: italic;
+    margin-bottom: 1rem; }
+  .je-edition__btn {
+    margin-top: 0.5rem; }
+  .je-edition__media {
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12); }
+    .je-edition__media img {
+      display: block; }
+
+/* ── Compétitions / distinctions étudiantes ─────────────────── */
+.competition-card {
+  width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-top: 4px solid #7f5f13;
+  transition: box-shadow 0.2s ease, transform 0.2s ease; }
+  .competition-card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.11);
+    transform: translateY(-2px); }
+  .competition-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 1.1rem;
+    background: rgba(127, 95, 19, 0.07);
+    border-bottom: 1px solid rgba(127, 95, 19, 0.12); }
+  .competition-card__year {
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #7f5f13;
+    letter-spacing: 0.02em; }
+  .competition-card__rank {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #fff;
+    background: #7f5f13;
+    padding: 0.25rem 0.7rem;
+    border-radius: 3px; }
+    .competition-card__rank::before {
+      content: "🏆";
+      font-size: 0.85rem; }
+  .competition-card__body {
+    padding: 1rem 1.1rem 1.1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column; }
+  .competition-card__colocated {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #00445e;
+    background: rgba(0, 68, 94, 0.08);
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    margin-bottom: 0.6rem;
+    align-self: flex-start; }
+    .competition-card__colocated i {
+      font-size: 0.78rem; }
+  .competition-card__name {
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 0.65rem;
+    line-height: 1.3; }
+  .competition-card__students {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-bottom: 0.85rem; }
+  .competition-card__student {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #333333;
+    background: #f3f3f3;
+    padding: 0.2rem 0.55rem;
+    border-radius: 12px; }
+  .competition-card__footer {
+    margin-top: auto;
+    padding-top: 0.4rem; }
+  .competition-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #7f5f13;
+    text-decoration: none; }
+    .competition-card__link:hover {
+      color: #5c440e;
+      text-decoration: underline; }
+    .competition-card__link i {
+      font-size: 0.95rem; }
+
+/* ── Section Hackathons sur la page Master ──────────────────── */
+.hackathons-section__baseline {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #bc052d;
+  line-height: 1.4;
+  margin-bottom: 1.25rem; }
+
+.hackathons-section__content {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #333333; }
+  .hackathons-section__content p {
+    margin-bottom: 0.9rem; }
+  .hackathons-section__content p:last-child {
+    margin-bottom: 0; }
+
+.hackathons-section__media {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1); }
+  .hackathons-section__media img {
+    display: block; }
+
+.hackathons-section__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  aspect-ratio: 4 / 3;
+  background: repeating-linear-gradient(45deg, #f5f5f5, #f5f5f5 14px, #efefef 14px, #efefef 28px);
+  color: #6b6b6b;
+  border-radius: 8px; }
+  .hackathons-section__placeholder i {
+    font-size: 3.5rem;
+    color: rgba(188, 5, 45, 0.35); }
+  .hackathons-section__placeholder span {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600; }
+
+/* ── Bloc Entreprises dans le footer ────────────────────────── */
+.footer-entreprises__desc {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #8996a7;
+  margin-bottom: 0.85rem; }
+
+.footer-entreprises__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.45rem 0.9rem;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s; }
+  .footer-entreprises__cta i {
+    font-size: 0.95rem; }
+  .footer-entreprises__cta:hover {
+    background: #bc052d;
+    border-color: #bc052d;
+    color: #fff;
+    text-decoration: none; }
+
+/* ── Page Entreprises ───────────────────────────────────────── */
+.entreprises-intro__title {
+  font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  font-size: 2.2rem;
+  color: #bc052d;
+  margin-bottom: 1rem; }
+
+.entreprises-intro__lead {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #333333; }
+
+.competences-cta {
+  margin-top: 2.5rem;
+  text-align: center; }
+  .competences-cta__hint {
+    font-size: 0.92rem;
+    color: #6b6b6b;
+    margin-bottom: 0.85rem;
+    font-style: italic; }
+
+.entreprises-voie {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 8px;
+  padding: 1.75rem 1.5rem 1.5rem;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease; }
+  .entreprises-voie:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+    border-color: rgba(188, 5, 45, 0.2); }
+  .entreprises-voie__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(188, 5, 45, 0.08);
+    color: #bc052d;
+    margin-bottom: 1rem; }
+    .entreprises-voie__icon i {
+      font-size: 1.4rem; }
+  .entreprises-voie__title {
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 0.75rem;
+    line-height: 1.3; }
+  .entreprises-voie__content {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: #333333;
+    flex: 1; }
+    .entreprises-voie__content p {
+      margin-bottom: 0.65rem; }
+    .entreprises-voie__content p:last-child {
+      margin-bottom: 0; }
+    .entreprises-voie__content strong {
+      color: #1a1a1a; }
+  .entreprises-voie__cta {
+    align-self: flex-start;
+    margin-top: 1.25rem; }
+
+.entreprises-contact__title {
+  font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  font-size: 1.5rem;
+  color: #bc052d;
+  margin-bottom: 0.6rem; }
+
+.entreprises-contact__content {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: #333333;
+  margin: 0; }
+
+/* ── Filtres et groupement par année sur /actualites/ ───────── */
+.actus-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ececec; }
+
+.actus-filter {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #333333;
+  background: #fff;
+  border: 1px solid #dcdcdc;
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
+  .actus-filter:hover {
+    background: rgba(188, 5, 45, 0.05);
+    border-color: rgba(188, 5, 45, 0.3);
+    color: #bc052d; }
+  .actus-filter.is-active {
+    background: #bc052d;
+    border-color: #bc052d;
+    color: #fff; }
+
+.actus-year-block {
+  margin-bottom: 2.5rem; }
+
+/* Override du display: flex !important de Bootstrap pour laisser `hidden` fonctionner */
+.actus-item[hidden],
+.actus-year-block[hidden],
+.actus-empty[hidden] {
+  display: none !important; }
+
+.actus-year {
+  font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #bc052d;
+  letter-spacing: 0.02em;
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(188, 5, 45, 0.15);
+  position: relative; }
+  .actus-year::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 3rem;
+    height: 2px;
+    background: #bc052d; }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Billet long (bilan d'année) — accents typographiques
+   ─────────────────────────────────────────────────────────────────────────
+   Parti pris : le billet reste un enchaînement de paragraphes. On n'ajoute
+   ni carte, ni encadré, ni grille — seulement quelques effets de police, un
+   bouton discret et une liste un peu rythmée. Ces classes sont génériques :
+   tout billet de type `post` peut les réutiliser.
+
+   Tout est imbriqué sous `.actu-single__content` : le gabarit pose
+   `.actu-single__content p { margin-bottom: 1rem }` en (0,1,1), qui l'emporte
+   sur une classe seule (0,1,0). L'imbrication donne (0,2,0) et évite les
+   `!important`.
+
+   Contrastes (seuil RGAA 3.2 / WCAG 1.4.3 = 4,5:1) :
+   · $primary-color #bc052d sur blanc .................. 6,55:1
+   · blanc sur $primary-color (bouton survolé) ......... 6,55:1
+   · $secondary-color #00445e sur blanc ............... 10,44:1
+   · $pc-competition #7f5f13 sur sa pastille à 12 % .... 5,32:1
+   · $text-color-light #6b6b6b sur blanc ............... 5,33:1
+   ───────────────────────────────────────────────────────────────────────── */
+.actu-single__content {
+  /* Titres de section. Le corps du billet commence en <h3> : <h1> est émis par
+     la bannière (partials/page-header.html) et <h2> par `.actu-single__title`.
+     Reprise de l'idiome de titre de section déjà employé ailleurs sur le site
+     (`.hackathons-section__title`) : filet court sous le texte, rien d'autre.
+     Sélectivité (0,1,1) : passe devant le `h3` global du haut de ce fichier. */
+  /* Sous-titres (une compétition, une école d'été) : simple changement de
+     police et de taille, sans filet ni fond. */
+  /* Classement obtenu, en incise dans la phrase. RGAA 3.1 — le texte qui
+     l'entoure porte l'information, la pastille ne fait que la souligner. */
+  /* Bouton discret : rouge ENC, angles droits, pas de `text-transform`
+     (`.btn` du thème impose `capitalize`, qui abîme les intitulés français). */
+  /* Rangée de boutons. */
+  /* Référence bibliographique, à la suite du paragraphe qu'elle documente. */
+  /* Communications de l'année : liste à puces ordinaire, seule la date reçoit
+     un traitement typographique. */ }
+  .actu-single__content h3 {
+    display: inline-block;
+    font-size: 1.5rem;
+    color: #00445e;
+    margin: 2.75rem 0 1.15rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 3px solid #bc052d; }
+    @media (max-width: 575px) {
+      .actu-single__content h3 {
+        font-size: 1.3rem; } }
+  .actu-single__content h4 {
+    font-size: 1.15rem;
+    color: #bc052d;
+    margin: 2rem 0 0.65rem; }
+  .actu-single__content .retro-rang {
+    display: inline-block;
+    font-weight: 700;
+    color: #7f5f13;
+    background: rgba(127, 95, 19, 0.12);
+    padding: 0.05em 0.45em;
+    border-radius: 3px;
+    white-space: nowrap; }
+  .actu-single__content .retro-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: #bc052d;
+    background: transparent;
+    border: 1px solid #bc052d;
+    padding: 0.55rem 1.05rem;
+    margin: 0 0.5rem 0.5rem 0;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease; }
+    .actu-single__content .retro-btn:hover, .actu-single__content .retro-btn:focus {
+      color: #fff;
+      background: #bc052d;
+      text-decoration: none; }
+    .actu-single__content .retro-btn i {
+      font-size: 0.95rem; }
+  .actu-single__content .retro-actions {
+    margin: 1.35rem 0 1.75rem; }
+  .actu-single__content .retro-source {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #6b6b6b;
+    margin: 0 0 1.5rem;
+    padding-left: 0.95rem;
+    border-left: 2px solid #e3e3e3; }
+    .actu-single__content .retro-source cite {
+      font-style: italic; }
+  .actu-single__content .retro-agenda {
+    padding-left: 1.2rem;
+    margin: 1.35rem 0 1.75rem; }
+    .actu-single__content .retro-agenda li {
+      margin-bottom: 0.75rem;
+      line-height: 1.65; }
+      .actu-single__content .retro-agenda li::marker {
+        color: #bc052d; }
+    .actu-single__content .retro-agenda__date {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #bc052d; }
+
+/* — Page Alumni (layouts/alumni/list.html) —
+   Titres d'année et intro empruntés à la page Actualités (.actus-year…).
+   Fiches carrées ; seul le contenu très long (titres de mémoire) les allonge. */
+.alumni-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #fff;
+  border-top: 4px solid #bc052d;
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.09); }
+  @media (max-width: 575px) {
+    .alumni-card {
+      aspect-ratio: auto; } }
+  .alumni-card__promo {
+    align-self: flex-start;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #00445e;
+    background: rgba(0, 68, 94, 0.08);
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    margin-bottom: 0.5rem; }
+  .alumni-card__name {
+    font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 0.2rem;
+    line-height: 1.25; }
+  .alumni-card__discipline {
+    font-size: 0.78rem;
+    color: #6b6b6b;
+    margin: 0 0 0.6rem;
+    line-height: 1.4; }
+  .alumni-card__memoire {
+    font-size: 0.76rem;
+    line-height: 1.4;
+    color: #333333;
+    margin: 0 0 0.75rem; }
+    .alumni-card__memoire a {
+      color: #1a1a1a;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(188, 5, 45, 0.35); }
+      .alumni-card__memoire a:hover, .alumni-card__memoire a:focus {
+        color: #bc052d;
+        border-bottom-color: #bc052d;
+        text-decoration: none; }
+  .alumni-card__label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #bc052d;
+    margin-bottom: 0.1rem; }
+  .alumni-card__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: auto; }
+  .alumni-card__link {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #00445e;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    border-bottom: 1px solid transparent; }
+    .alumni-card__link:hover, .alumni-card__link:focus {
+      color: #bc052d;
+      border-bottom-color: #bc052d;
+      text-decoration: none; }
+
+/* Button style */
+.btn {
+  font-size: 16px;
+  font-family: "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  text-transform: capitalize;
+  padding: 15px 40px;
+  border-radius: 0;
+  font-weight: 500;
+  border: 0;
+  position: relative;
+  z-index: 1;
+  transition: .2s ease;
+  overflow: hidden;
+  white-space: nowrap; }
+  .btn::before {
+    position: absolute;
+    content: "";
+    height: 80%;
+    width: 100%;
+    left: 0;
+    bottom: 10%;
+    z-index: -1;
+    transition: transform .2s ease-in-out;
+    transform-origin: top;
+    transform: scaleY(0); }
+  .btn:active, .btn:hover, .btn.focus, .btn:focus, .btn.active {
+    outline: 0;
+    box-shadow: none !important; }
+    .btn:active::before, .btn:hover::before, .btn.focus::before, .btn:focus::before, .btn.active::before {
+      transform: scaleY(1);
+      transform-origin: bottom; }
+
+.btn-sm {
+  font-size: 14px;
+  padding: 10px 35px; }
+
+.btn-xs {
+  font-size: 12px;
+  padding: 5px 15px; }
+
+.btn-primary {
+  color: #fff;
+  background-color: #bc052d; }
+  .btn-primary::before {
+    background-color: #fff; }
+  .btn-primary:active, .btn-primary:hover, .btn-primary.focus, .btn-primary:focus, .btn-primary.active {
+    color: #bc052d !important;
+    background-color: #8a0421 !important;
+    border-color: #8a0421 !important; }
+
+.btn-outline-primary {
+  color: #bc052d;
+  background-color: transparent;
+  border: 1px solid #bc052d; }
+  .btn-outline-primary::before {
+    background-color: #fff; }
+  .btn-outline-primary:active, .btn-outline-primary:hover, .btn-outline-primary.focus, .btn-outline-primary:focus, .btn-outline-primary.active {
+    color: #bc052d !important;
+    background-color: #bc052d !important;
+    border-color: #bc052d !important; }
+
+.btn-light {
+  color: #bc052d;
+  background-color: #fff;
+  border: 1px solid #fff; }
+  .btn-light::before {
+    background-color: #bc052d; }
+  .btn-light:active, .btn-light:hover, .btn-light.focus, .btn-light:focus, .btn-light.active {
+    color: #fff !important;
+    background-color: #fff !important;
+    border: 1px solid #fff !important; }
+
+body {
+  background-color: #fff;
+  overflow-x: hidden; }
+
+::selection {
+  background: #ee0639;
+  color: #fff; }
+
+/* preloader */
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #FFDC11;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+ol,
+ul {
+  list-style-type: none;
+  margin: 0px; }
+
+img {
+  vertical-align: middle;
+  border: 0; }
+
+a,
+a:hover,
+a:focus {
+  text-decoration: none; }
+
+a {
+  color: inherit; }
+
+a,
+button,
+select {
+  cursor: pointer;
+  transition: .2s ease; }
+  a:focus,
+  button:focus,
+  select:focus {
+    outline: 0; }
+
+a:hover {
+  color: #bc052d; }
+
+a.text-primary:hover {
+  color: #bc052d !important; }
+
+a.text-light:hover {
+  color: #bc052d !important; }
+
+h4 {
+  transition: .2s ease; }
+
+a h4:hover {
+  color: #bc052d; }
+
+.slick-slide {
+  outline: 0; }
+
+.section {
+  padding-top: 90px;
+  padding-bottom: 90px; }
+  .section-sm {
+    padding-top: 40px;
+    padding-bottom: 40px; }
+  .section-title {
+    margin-bottom: 30px; }
+
+.bg-cover {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat; }
+
+.border-primary {
+  border-color: #e3e3e3 !important; }
+
+/* overlay */
+.overlay {
+  position: relative; }
+  .overlay::before {
+    position: absolute;
+    content: '';
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: #00445e;
+    opacity: .8; }
+
+.outline-0 {
+  outline: 0 !important; }
+
+.d-unset {
+  display: unset !important; }
+
+.bg-primary {
+  background: #bc052d !important; }
+
+.bg-secondary {
+  background: #00445e !important; }
+
+.bg-gray {
+  background: #f5f2ef; }
+
+.text-primary {
+  color: #bc052d !important; }
+
+.text-color {
+  color: #333333; }
+
+.text-light {
+  color: #6b6b6b !important; }
+
+.text-lighten {
+  color: #d6d6e0 !important; }
+
+.text-muted {
+  color: #b5b5b7 !important; }
+
+.text-dark {
+  color: #1a1a1a !important; }
+
+.font-secondary {
+  font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif; }
+
+.mb-10 {
+  margin-bottom: 10px !important; }
+
+.mb-20 {
+  margin-bottom: 20px !important; }
+
+.mb-30 {
+  margin-bottom: 30px !important; }
+
+.mb-40 {
+  margin-bottom: 40px !important; }
+
+.mb-50 {
+  margin-bottom: 50px !important; }
+
+.mb-60 {
+  margin-bottom: 60px !important; }
+
+.mb-70 {
+  margin-bottom: 70px !important; }
+
+.mb-80 {
+  margin-bottom: 80px !important; }
+
+.mb-90 {
+  margin-bottom: 90px !important; }
+
+.mb-100 {
+  margin-bottom: 100px !important; }
+
+.pl-150 {
+  padding-left: 150px; }
+
+.zindex-1 {
+  z-index: 1; }
+
+@media (max-width: 991px) {
+  .overflow-md-hidden {
+    overflow: hidden; } }
+
+.vertical-align-middle {
+  vertical-align: middle; }
+
+.icon-md {
+  font-size: 36px; }
+
+/* page title */
+.page-title-section {
+  padding: 200px 0 80px; }
+
+.custom-breadcrumb li.nasted {
+  position: relative;
+  padding-left: 25px; }
+  .custom-breadcrumb li.nasted::before {
+    position: absolute;
+    font-family: "themify";
+    content: "\e649";
+    font-size: 20px;
+    top: 50%;
+    left: -5px;
+    color: #fff;
+    transform: translateY(-50%); }
+
+/* /page title */
+.list-styled {
+  padding-left: 25px; }
+  .list-styled li {
+    position: relative;
+    margin-bottom: 15px; }
+    .list-styled li::before {
+      position: absolute;
+      content: "";
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      background: #bc052d;
+      left: -25px;
+      top: 5px; }
+
+textarea.form-control {
+  height: 200px;
+  padding: 20px; }
+
+#map_canvas {
+  height: 500px; }
+
+.post-thumb-sm {
+  max-width: 100px;
+  max-height: 100px;
+  object-fit: cover; }
+
+/* pagination */
+.pagination {
+  justify-content: center; }
+  .pagination .page-item {
+    margin: 0 10px; }
+    .pagination .page-item.active .page-link {
+      background: #bc052d;
+      color: #fff;
+      border-color: #bc052d; }
+    .pagination .page-item:first-child .page-link, .pagination .page-item:last-child .page-link {
+      border-radius: 0; }
+    .pagination .page-item .page-link {
+      color: #333333; }
+
+.content * {
+  margin-bottom: 20px; }
+
+.content a {
+  text-decoration: underline; }
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+  margin-bottom: 10px; }
+
+.content ol {
+  padding-left: 20px; }
+
+.content ul {
+  padding-left: 0; }
+  .content ul li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    list-style-type: none; }
+    .content ul li::before {
+      position: absolute;
+      content: "\e65d";
+      font-family: "themify";
+      font-size: 14px;
+      left: 0;
+      top: 1px;
+      color: #bc052d;
+      transition: .3s ease; }
+
+.content table {
+  text-align: left;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  border: 1px solid #dee2e6; }
+  .content table th,
+  .content table td {
+    padding: .75rem;
+    vertical-align: top;
+    border: 1px solid #dee2e6; }
+  .content table thead {
+    background: #f7f2ee; }
+  .content table tbody {
+    background: #faf7f5; }
+    .content table tbody td {
+      text-align: left !important; }
+
+.content blockquote p {
+  margin-bottom: 0;
+  color: #333333;
+  font-style: italic !important; }
+
+.content pre {
+  padding: 10px 20px;
+  background: #faf7f5; }
+
+.teacher-thumb-sm {
+  height: 85px;
+  width: 85px;
+  object-fit: cover; }
+
+.top-header {
+  font-size: 12px;
+  transition: transform .2s ease;
+  transform-origin: top;
+  font-weight: 600; }
+  .top-header.hide {
+    transform: scaleY(0);
+    transform-origin: top; }
+
+.navigation {
+  background: linear-gradient(to right, transparent 50%, #bc052d 50%);
+  transition: .2s ease; }
+  @media (max-width: 991px) {
+    .navigation {
+      background: #00445e; }
+      .navigation .navbar-brand {
+        padding: 12px 0; } }
+@media (max-width: 991px) {
+  .navbar-collapse {
+    background: #00445e; } }
+
+.navbar-nav {
+  padding-left: 50px;
+  background: #bc052d; }
+  @media (max-width: 991px) {
+    .navbar-nav {
+      padding-left: 0;
+      background: #00445e; } }
+.nav-bg {
+  background-color: #00445e; }
+
+.nav-item {
+  margin: 0 15px;
+  position: relative; }
+  .nav-item .nav-link {
+    text-transform: uppercase;
+    font-weight: 600; }
+  .nav-item::before {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 6px;
+    width: 100%;
+    content: "";
+    background: #fff;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform .3s ease; }
+  .nav-item:hover::before, .nav-item.active::before {
+    transform: scaleY(1);
+    transform-origin: bottom; }
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #fff; }
+
+link:focus,
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #fff; }
+
+.navbar-dark .navbar-nav .active > .nav-link,
+.navbar-dark .navbar-nav .nav-link.active,
+.navbar-dark .navbar-nav .nav-link.show,
+.navbar-dark .navbar-nav .show > .nav-link {
+  color: #fff; }
+
+.navbar-expand-lg .navbar-nav .nav-link {
+  padding: 40px 0px; }
+  @media (max-width: 991px) {
+    .navbar-expand-lg .navbar-nav .nav-link {
+      padding: 20px; } }
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  background: #fff;
+  box-shadow: 0 2px 5px #0000000d; }
+
+.navbar .dropdown:hover .dropdown-menu {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0); }
+
+.navbar .dropdown-menu {
+  box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.12);
+  border-bottom: 5px solid #bc052d;
+  padding: 15px;
+  top: 96px;
+  border-radius: 0;
+  display: block;
+  visibility: hidden;
+  transition: .3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  background: #fff; }
+  @media (max-width: 991px) {
+    .navbar .dropdown-menu {
+      display: none;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transform-origin: unset; } }
+  .navbar .dropdown-menu.show {
+    visibility: hidden; }
+    @media (max-width: 991px) {
+      .navbar .dropdown-menu.show {
+        visibility: visible;
+        display: block; } }
+.navbar .dropdown-item {
+  position: relative;
+  color: #1a1a1a;
+  transition: .2s ease;
+  text-transform: capitalize;
+  font-family: "Noto Sans", "Helvetica Neue", Arial, sans-serif; }
+  @media (max-width: 991px) {
+    .navbar .dropdown-item {
+      text-align: center; } }
+  .navbar .dropdown-item:not(:last-child) {
+    margin-bottom: 10px; }
+  .navbar .dropdown-item:hover {
+    color: #bc052d;
+    background: transparent; }
+
+.hero-section {
+  padding: 250px 0 290px; }
+
+.hero-slider .prevArrow,
+.hero-slider .nextArrow {
+  position: absolute;
+  bottom: -123px;
+  z-index: 9;
+  padding: 15px;
+  color: rgba(255, 255, 255, 0.5);
+  border: 0;
+  font-size: 30px;
+  transition: all linear .2s;
+  background: transparent; }
+  .hero-slider .prevArrow:focus,
+  .hero-slider .nextArrow:focus {
+    outline: 0; }
+  .hero-slider .prevArrow:hover,
+  .hero-slider .nextArrow:hover {
+    color: #bc052d; }
+
+.hero-slider .prevArrow {
+  right: 60px; }
+
+.hero-slider .nextArrow {
+  right: 0; }
+
+.hero-slider .slick-dots {
+  position: absolute;
+  left: 0;
+  bottom: -100px;
+  padding-left: 0; }
+  .hero-slider .slick-dots li {
+    display: inline-block;
+    margin: 0 6px; }
+    .hero-slider .slick-dots li.slick-active button {
+      background: #bc052d; }
+    .hero-slider .slick-dots li button {
+      color: transparent;
+      padding: 0;
+      overflow: hidden;
+      height: 10px;
+      width: 10px;
+      background: rgba(255, 255, 255, 0.5);
+      border: 0;
+      outline: 0; }
+
+/* banner feature */
+.feature-icon {
+  font-size: 50px;
+  color: #bc052d;
+  display: inline-block; }
+
+.feature-blocks {
+  margin-top: -100px;
+  padding-left: 70px;
+  padding-top: 80px;
+  padding-right: 30%; }
+  @media (max-width: 1400px) {
+    .feature-blocks {
+      padding-right: 10%; } }
+  @media (max-width: 1200px) {
+    .feature-blocks {
+      padding-right: 50px;
+      padding-left: 50px;
+      padding-top: 30px; }
+      .feature-blocks h3 {
+        font-size: 20px; } }
+  @media (max-width: 991px) {
+    .feature-blocks {
+      margin-top: 0;
+      padding: 50px; }
+      .feature-blocks h3 {
+        font-size: 25px; } }
+/* /banner feature */
+/* course */
+.card-btn {
+  font-size: 12px;
+  padding: 5px 10px; }
+
+.flex-basis-33 {
+  flex-basis: 33.3333%; }
+
+.hover-shadow {
+  transition: .3s ease; }
+  .hover-shadow:hover {
+    box-shadow: 0px 4px 25px 0px rgba(27, 39, 71, 0.15); }
+
+/* /course */
+/* success story */
+.success-video {
+  min-height: 300px; }
+  .success-video .play-btn {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%); }
+    @media (max-width: 767px) {
+      .success-video .play-btn {
+        left: 50%;
+        transform: translate(-50%, -50%); } }
+.play-btn {
+  display: inline-block;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  background: #bc052d;
+  color: #fff;
+  font-size: 20px;
+  text-align: center; }
+  .play-btn i {
+    line-height: 80px; }
+  .play-btn::before {
+    position: absolute;
+    content: "";
+    height: 0;
+    width: 0;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    z-index: -2;
+    transition: .3s ease;
+    transition-delay: .2s; }
+  .play-btn::after {
+    position: absolute;
+    content: "";
+    height: 80%;
+    width: 80%;
+    transform: translate(-50%, -50%);
+    background: #bc052d;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    transition: .3s ease; }
+  .play-btn:hover::before {
+    height: 80%;
+    width: 80%;
+    transition-delay: 0s; }
+  .play-btn:hover::after {
+    height: 0;
+    width: 0;
+    transition: 0s ease; }
+
+/* /success story */
+/* events */
+.card-date {
+  position: absolute;
+  background: #bc052d;
+  font-family: "CartaNova", "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  text-align: center;
+  padding: 10px;
+  color: #fff;
+  top: 0;
+  left: 0;
+  text-transform: uppercase; }
+  .card-date span {
+    font-size: 40px; }
+
+/* /events */
+/* teacher */
+.teacher-info {
+  width: 70%;
+  bottom: 0;
+  right: 0; }
+
+/* /teacher */
+/* footer */
+.newsletter {
+  background-image: linear-gradient(to right, transparent 50%, #bc052d 50%);
+  margin-bottom: -170px;
+  position: relative;
+  z-index: 1; }
+  .newsletter-block {
+    padding-left: 50px; }
+    @media (max-width: 575px) {
+      .newsletter-block {
+        padding-left: 15px; } }
+.input-wrapper {
+  position: relative; }
+  .input-wrapper button {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%); }
+    @media (max-width: 575px) {
+      .input-wrapper button {
+        position: static;
+        transform: translateY(-10px);
+        width: 100%;
+        outline: 5px solid #fff;
+        outline-offset: -5px; } }
+.form-control {
+  height: 60px;
+  background: #fff;
+  border-radius: 0;
+  padding-left: 25px; }
+  .form-control:focus {
+    border-color: #bc052d;
+    box-shadow: none; }
+
+.newsletter-block .form-control {
+  height: 80px;
+  padding-right: 160px; }
+  @media (max-width: 575px) {
+    .newsletter-block .form-control {
+      padding-right: 25px; } }
+.bg-footer {
+  background-color: #182b45; }
+
+.logo-footer {
+  margin-top: -20px;
+  display: inline-block; }
+
+.footer {
+  border-color: #494a43 !important;
+  padding-top: 275px;
+  color: #8996a7; }
+  .footer a {
+    color: #8996a7;
+    text-transform: capitalize; }
+    .footer a:hover {
+      text-decoration: underline;
+      color: #fff; }
+
+.copyright p {
+  color: #8996a7;
+  text-transform: capitalize; }
+
+/* /footer */
+.filter-controls li {
+  cursor: pointer;
+  transition: .1s ease; }
+  .filter-controls li.active {
+    font-weight: 600;
+    color: #bc052d; }
+  .filter-controls li:hover {
+    color: #bc052d; }
+
+.tag-list a {
+  display: block;
+  padding: 5px 10px;
+  background: #faf7f5;
+  color: #333333; }
+  .tag-list a:hover {
+    background-color: #bc052d;
+    color: #fff; }
+
+.media a:hover h5 {
+  color: #bc052d;
+  transition: 0.3s; }
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important; }
+
+caption.sr-only {
+  position: static !important;
+  display: block;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%); }
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 2000;
+  padding: 0.75rem 1.25rem;
+  background: #ffffff;
+  color: #00445e;
+  font-weight: 600;
+  text-decoration: underline;
+  border-radius: 0 0 4px 4px;
+  transition: none; }
+  .skip-link:focus {
+    top: 0;
+    color: #00445e;
+    outline: 3px solid #bc052d;
+    outline-offset: 2px; }
+
+main:focus {
+  outline: none; }
+
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible,
+.btn:focus-visible,
+.programme-accordion__btn:focus-visible,
+.actus-filter:focus-visible,
+.programme-tabs__nav .nav-link:focus-visible,
+.publications-search:focus-visible {
+  outline: 3px solid #bc052d;
+  outline-offset: 2px;
+  border-radius: 2px; }
+
+.navigation a:focus-visible,
+.navbar-nav .nav-link:focus-visible,
+.navbar-brand:focus-visible,
+.navbar-toggler:focus-visible,
+.bg-footer a:focus-visible,
+.footer a:focus-visible,
+.copyright a:focus-visible,
+.hero-section a:focus-visible,
+.page-title-section a:focus-visible {
+  outline-color: #ffffff; }
+
+.form-control:focus-visible {
+  outline: 3px solid #bc052d !important;
+  outline-offset: 2px; }
+
+@supports not selector(:focus-visible) {
+  a:focus,
+  button:focus,
+  select:focus,
+  input:focus,
+  textarea:focus,
+  .programme-accordion__btn:focus,
+  .actus-filter:focus {
+    outline: 3px solid #bc052d;
+    outline-offset: 2px; }
+  .navigation a:focus,
+  .navbar-nav .nav-link:focus,
+  .footer a:focus,
+  .copyright a:focus {
+    outline-color: #ffffff; } }
+
+.text-muted {
+  color: #6f6f70 !important; }
+
+.footer a,
+.copyright p,
+.copyright {
+  color: #b1bfd0; }
+
+.footer-platform-desc {
+  color: #b0d2df !important; }
+
+.text-lighten {
+  color: #dedee8 !important; }
+
+.programme-accordion__btn:not(.collapsed) .sem-meta {
+  color: #5e5d5d; }
+
+.frais-item--intl .frais-label {
+  color: #5f5f5f; }
+
+.phase-solo--full .phase-solo__label {
+  color: #5e5d5d; }
+
+::selection {
+  background: #e00534;
+  color: #ffffff; }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important; } }
+
+.content p > a:not(.btn),
+.content li > a:not(.btn),
+.hackathons-section__content a:not(.btn),
+.junior-content a:not(.btn),
+.entreprise-intro a:not(.btn) {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px; }
+  .content p > a:not(.btn):hover, .content p > a:not(.btn):focus,
+  .content li > a:not(.btn):hover,
+  .content li > a:not(.btn):focus,
+  .hackathons-section__content a:not(.btn):hover,
+  .hackathons-section__content a:not(.btn):focus,
+  .junior-content a:not(.btn):hover,
+  .junior-content a:not(.btn):focus,
+  .entreprise-intro a:not(.btn):hover,
+  .entreprise-intro a:not(.btn):focus {
+    text-decoration: underline; }
+
+.form-control {
+  border-color: #878d92; }
+
+.publications-search {
+  border-color: #8c8c8c; }
+
+.actus-filter {
+  border-color: #8c8c8c; }
+
+.phase-solo__year {
+  border-color: #0085b6; }
+
+.plan-site,
+.plan-site__sub {
+  list-style: none;
+  padding-left: 0; }
+
+.plan-site > li {
+  margin-bottom: 1.25rem; }
+  .plan-site > li > a {
+    font-weight: 600; }
+
+.plan-site__sub {
+  margin: 0.4rem 0 0 1.25rem;
+  border-left: 2px solid #e3e3e3;
+  padding-left: 1rem; }
+  .plan-site__sub li {
+    margin-bottom: 0.2rem;
+    font-size: 0.92rem; }
+
+.plan-site__label {
+  color: #6f6f70;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.35rem; }
+
+.copyright-links {
+  margin-top: 0.35rem;
+  font-size: 0.92rem; }
+  .copyright-links a {
+    color: #b1bfd0;
+    text-decoration: underline;
+    text-underline-offset: 0.15em; }
+
+.navbar .dropdown:focus-within .dropdown-menu {
+  visibility: visible;
+  opacity: 1;
+  transform: none; }
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-weight: 600; }
+
+p.h1,
+p.h2,
+p.h3,
+p.h4,
+p.h5,
+p.h6 {
+  line-height: 1.2; }
+
+code {
+  color: #e21b77; }
+
+@media (max-width: 575.98px) {
+  .btn {
+    white-space: normal;
+    max-width: 100%; }
+  .pagination {
+    flex-wrap: wrap;
+    row-gap: 0.5rem; }
+  .phase-divider__badge {
+    white-space: normal;
+    min-width: 0;
+    max-width: 100%; } }
+
+@media (max-width: 991.98px) {
+  .navbar-brand {
+    min-width: 0;
+    max-width: 100%; }
+  .navbar-brand img {
+    max-width: 100% !important; } }
+
+.memoire-card__title,
+.student-project-card__title {
+  display: block;
+  -webkit-line-clamp: none;
+  overflow: visible; }
+
+h1, h2, h3, h4, h5, h6,
+p, li, dd, dt, td, th,
+figcaption,
+.btn {
+  overflow-wrap: break-word; }
+
+.programme-accordion__btn .sem-meta {
+  white-space: normal; }
+
+@media (max-width: 575.98px) {
+  .master-info-card__list .label {
+    flex-shrink: 1; }
+  .master-info-card__list .value {
+    min-width: 0; }
+  .section-title h2 {
+    white-space: normal !important; } }
+
+.figure-desc {
+  margin: -0.75rem 0 1.5rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #333333; }
+  .figure-desc > summary {
+    cursor: pointer;
+    color: #00445e;
+    font-weight: 600;
+    font-size: 0.82rem;
+    padding: 0.35rem 0;
+    text-decoration: underline;
+    text-underline-offset: 0.15em; }
+    .figure-desc > summary:focus-visible {
+      outline: 3px solid #bc052d;
+      outline-offset: 2px; }
+  .figure-desc[open] > summary {
+    margin-bottom: 0.5rem; }
+  .figure-desc > p,
+  .figure-desc > ul,
+  .figure-desc > ol {
+    border-left: 3px solid rgba(0, 68, 94, 0.35);
+    background: rgba(0, 68, 94, 0.03);
+    padding: 0.75rem 1rem;
+    margin: 0 0 0.6rem; }
+  .figure-desc > ul,
+  .figure-desc > ol {
+    padding-left: 2.2rem; }
+
+.figure-desc > table {
+  margin: 0 0 0.6rem;
+  font-size: 0.85rem; }
